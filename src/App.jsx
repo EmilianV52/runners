@@ -211,7 +211,7 @@ function App() {
     <div className="min-h-screen p-4 md:p-8 font-sans max-w-2xl mx-auto">
       <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 bg-white dark:bg-dark-bg p-4 rounded-xl shadow-sm border border-light-border dark:border-dark-border gap-4">
         <h1 className="text-2xl font-black text-light-heading dark:text-dark-text tracking-tight uppercase">
-          Catering Tracker
+          blabla
         </h1>
         <div className="flex space-x-3 items-center w-full sm:w-auto justify-end">
           <button 
