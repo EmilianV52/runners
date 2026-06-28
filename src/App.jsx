@@ -225,7 +225,7 @@ function App() {
             className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-xl shadow-inner transition-colors shrink-0"
             aria-label="Toggle theme"
           >
-            {darkMode ? '🌙' : '☀️'}
+            {darkMode ? '🌚' : '🌞'}
           </button>
         </div>
       </header>
