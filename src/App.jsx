@@ -6,52 +6,45 @@ const initialData = [
     id: '1',
     date: '26.06',
     teams: [
-      {
-        name: 'Checkin',
-        items: [
-          { name: 'Bax Apă', quantity: 0 },
-          { name: 'Sendviș', quantity: 0 },
-          { name: 'Vegan', quantity: 0 },
-          { name: 'Vegi', quantity: 0 }
-        ]
-      },
-      {
-        name: 'Scanare',
-        items: [
-          { name: 'Bax Apă', quantity: 0 },
-          { name: 'Sendviș', quantity: 0 }
-        ]
-      },
-      {
-        name: 'Runners',
-        items: [
-          { name: 'Bax Apă', quantity: 0 },
-          { name: 'Sendviș', quantity: 0 },
-          { name: 'Vegi', quantity: 0 }
-        ]
-      }
+      { name: 'Checkin', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Scanare', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Obiecte Pierdute', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Direcționare', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Runners', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Șefii', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] }
     ]
   },
   {
     id: '2',
     date: '27.06',
     teams: [
-      {
-        name: 'Direcționare',
+      { name: 'Checkin', 
+        items: [
+          { name: 'Bax Apă', quantity: 0 }, 
+          { name: 'Sendviș', quantity: 0 }, 
+          { name: 'Vegie', quantity: 0 }] },
+      { name: 'Scanare',
+         items: [
+          { name: 'Bax Apă', quantity: 0 },
+           { name: 'Sendviș', quantity: 0 },
+            { name: 'Vegie', quantity: 0 }] },
+      { name: 'Obiecte Pierdute', 
         items: [
           { name: 'Bax Apă', quantity: 0 },
-          { name: 'Sendviș', quantity: 0 }
-        ]
-      },
-      {
-        name: 'Șefii',
-        items: [
-          { name: 'Bax Apă', quantity: 0 },
-          { name: 'Sendviș', quantity: 0 },
-          { name: 'Vegan', quantity: 0 },
-          { name: 'Vegi', quantity: 0 }
-        ]
-      }
+           { name: 'Sendviș', quantity: 0 },
+            { name: 'Vegie', quantity: 0 }] },
+      { name: 'Direcționare',
+         items: [{ name: 'Bax Apă', quantity: 0 },
+           { name: 'Sendviș', quantity: 0 },
+            { name: 'Vegie', quantity: 0 }] },
+      { name: 'Runners',
+         items: [{ name: 'Bax Apă', quantity: 0 },
+           { name: 'Sendviș', quantity: 0 },
+            { name: 'Vegie', quantity: 0 }] },
+      { name: 'Șefii',
+         items: [{ name: 'Bax Apă', quantity: 0 },
+           { name: 'Sendviș', quantity: 0 }, 
+           { name: 'Vegie', quantity: 0 }] }
     ]
   }
 ];
@@ -100,7 +93,6 @@ function App() {
     }
   }, [darkMode]);
 
-  // Derived state
   const currentEvent = events.find(e => e.id === selectedEventId) || events[0];
 
   const handleUpdateItem = (eventId, teamName, itemName, newQuantity) => {
@@ -131,15 +123,19 @@ function App() {
   };
 
   const handleCreateEvent = () => {
-    const templateEvent = currentEvent || (events.length > 0 ? events[events.length - 1] : initialData[0]);
-    
+    const defaultTeams = [
+      { name: 'Checkin', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Scanare', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Obiecte Pierdute', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Direcționare', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Runners', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] },
+      { name: 'Șefii', items: [{ name: 'Bax Apă', quantity: 0 }, { name: 'Sendviș', quantity: 0 }, { name: 'Vegie', quantity: 0 }] }
+    ];
+
     const newEvent = {
       id: Date.now().toString(),
-      date: `New Event ${events.length + 1}`,
-      teams: templateEvent.teams.map(team => ({
-        ...team,
-        items: team.items.map(item => ({ ...item, quantity: 0 }))
-      }))
+      date: `Eveniment ${events.length + 1}`,
+      teams: defaultTeams
     };
 
     setEvents(prev => [...prev, newEvent]);
@@ -159,13 +155,9 @@ function App() {
     let csvContent = "Team,Item Category,Quantity\n";
     const totals = {};
 
-    // Rows for each team and item
     currentEvent.teams.forEach(team => {
       team.items.forEach(item => {
-        // Enclose strings in quotes to handle commas or special characters
         csvContent += `"${team.name}","${item.name}",${item.quantity}\n`;
-        
-        // Track totals
         if (!totals[item.name]) {
           totals[item.name] = 0;
         }
@@ -173,13 +165,11 @@ function App() {
       });
     });
 
-    // Summary Rows
     csvContent += `\n"EVENT TOTALS","",""\n`;
     Object.entries(totals).forEach(([itemName, totalQuantity]) => {
       csvContent += `"","${itemName}",${totalQuantity}\n`;
     });
 
-    // Create Blob and trigger download
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -191,7 +181,7 @@ function App() {
   };
 
   const clearData = () => {
-    if (window.confirm("Are you sure you want to reset all quantities to zero for THIS event?")) {
+    if (window.confirm("Sigur vrei să resetezi toate cantitățile la zero pentru ACEST eveniment?")) {
       setEvents(prev => prev.map(ev => {
         if (ev.id === selectedEventId) {
           return {
@@ -207,9 +197,18 @@ function App() {
     }
   };
 
+  const hardResetApp = () => {
+    if (window.confirm("ATENȚIE: Sigur vrei să ștergi TOATE datele vechi și să încarci structura nouă cu cele 6 echipe complete? Toate înregistrările curente vor fi pierdute!")) {
+      localStorage.removeItem('catering_events_data');
+      localStorage.removeItem('catering_selected_event');
+      setEvents(initialData);
+      setSelectedEventId(initialData[0].id);
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="min-h-screen p-4 md:p-8 font-sans max-w-2xl mx-auto">
-      {/* Top Navbar - Fixed Bug: using dark:bg-dark-bg instead of dark-border */}
       <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 bg-white dark:bg-dark-bg p-4 rounded-xl shadow-sm border border-light-border dark:border-dark-border gap-4">
         <h1 className="text-2xl font-black text-light-heading dark:text-dark-text tracking-tight uppercase">
           Catering Tracker
@@ -217,7 +216,7 @@ function App() {
         <div className="flex space-x-3 items-center w-full sm:w-auto justify-end">
           <button 
             onClick={exportToCSV}
-            className="text-sm px-3 py-2 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 rounded font-semibold hover:bg-green-200 dark:hover:bg-green-800 transition shadow-sm"
+            className="text-sm px-3 py-2 bg-transparent border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition shadow-sm"
           >
             Export CSV
           </button>
@@ -231,7 +230,6 @@ function App() {
         </div>
       </header>
 
-      {/* Event Navigation & Controls */}
       <div className="mb-6 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col space-y-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div className="flex flex-col space-y-1 w-full sm:w-2/3">
@@ -286,9 +284,15 @@ function App() {
                 <div className="flex-1"></div>
                 <button 
                   onClick={clearData}
-                  className="text-xs px-2 py-1 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 rounded hover:bg-red-200 dark:hover:bg-red-800 transition"
+                  className="text-xs px-2 py-1 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 rounded hover:bg-red-200 dark:hover:bg-red-800 transition mr-2"
                 >
                   Reset Event
+                </button>
+                <button 
+                  onClick={hardResetApp}
+                  className="text-xs px-2 py-1 bg-gray-800 text-white dark:bg-red-700 dark:text-white rounded hover:bg-opacity-90 transition"
+                >
+                  Reset Complet Aplicatie
                 </button>
               </div>
             )}
